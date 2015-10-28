@@ -24,15 +24,8 @@ public class Match {
 		return false;
 	}
 
-	public Player winner() {
+	public Player winnerPlayer() {
 		return winner;
-	}
-
-	public void wonPointPlayerOne() {
-		this.playerOne.incPoints();
-	}
-	public void wonPointPlayerTwo() {
-		this.playerTwo.incPoints();
 	}
 
 	public boolean hasAdvantage() {
@@ -46,12 +39,19 @@ public class Match {
 		return false;
 	}
 
-	public Player advantage() {
+	public Player advantagePlayer() {
 		return advantage;
 	}
 
 	public String getScore() {
 		ScoreBuilder scoreBuilder = new ScoreBuilder(playerOne.getPoints(), playerTwo.getPoints());
 		return scoreBuilder.getScore();
+	}
+
+	public void addPointTo(String player) {
+		if(playerOne.getName().equals(player))
+			playerOne.incPoints();
+		else
+			playerTwo.incPoints();
 	}
 }

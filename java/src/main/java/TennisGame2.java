@@ -1,26 +1,24 @@
 
 public class TennisGame2 implements TennisGame
 {
+	private static final String ADVANTAGE_MESSAGE = "Advantage ";
+	private static final String WIN_MESSAGE = "Win for ";
 	private Match match;
 
-    public TennisGame2(String player1Name, String player2Name) {
-        this.match = new Match(player1Name, player2Name);
+    public TennisGame2(String playerOneName, String playerTwoName) {
+        this.match = new Match(playerOneName, playerTwoName);
     }
 
     public String getScore(){
     	if(match.hasWinner())
-    		return "Win for " + match.winner().getName();
+    		return WIN_MESSAGE + match.winnerPlayer().getName();
     	else if(match.hasAdvantage())
-    		return "Advantage " + match.advantage().getName();
+    		return ADVANTAGE_MESSAGE + match.advantagePlayer().getName();
 
     	return match.getScore();
     }
 
     public void wonPoint(String player) {
-        if (player == "player1") {
-			match.wonPointPlayerOne();
-        } else {
-        	match.wonPointPlayerTwo();
-        }
+        match.addPointTo(player);
     }
 }

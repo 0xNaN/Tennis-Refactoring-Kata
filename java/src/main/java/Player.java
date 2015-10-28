@@ -1,6 +1,9 @@
 
 public class Player {
 
+	private static final int WIN_DELTA_POINTS_THRESHOLD = 2;
+	private static final int WIN_MIN_POINTS = 4;
+	private static final int ADVANTAGE_THRESHOLD = 3;
 	private String name;
 	private int points;
 	
@@ -14,11 +17,13 @@ public class Player {
 	}
 	
 	public boolean wins(Player player) {
-		return (getPoints() >= 4 && player.getPoints()>=0 && (getPoints() - player.getPoints())>=2);
+		return (getPoints() >= WIN_MIN_POINTS && player.getPoints()>= 0 && 
+			   (getPoints() - player.getPoints())>= WIN_DELTA_POINTS_THRESHOLD);
 	}
 	
 	public boolean hasAdvantage(Player player) {
-		return (getPoints() > player.getPoints() && player.getPoints() >= 3);
+		return (getPoints() > player.getPoints() && 
+				player.getPoints() >= ADVANTAGE_THRESHOLD);
 	}
 	
 	public int getPoints() {

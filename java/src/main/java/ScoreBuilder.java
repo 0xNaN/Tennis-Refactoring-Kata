@@ -1,6 +1,15 @@
 
 public class ScoreBuilder {
 
+	private static final int DEUCE_THRESHOLD = 3;
+	private static final String FORTY_POINT = "Forty";
+	private static final String THIRTY_POINT = "Thirty";
+	private static final String FIFTEEN_POINT = "Fifteen";
+	private static final String LOVE_POINT = "Love";
+	private static final String DEUCE = "Deuce";
+	private static final String TIE_SUFFIX = "All";
+	private static final String SEPARATOR = "-";
+	
 	private int playerOnePoints;
 	private int playerTwoPoints;
 
@@ -11,24 +20,24 @@ public class ScoreBuilder {
 
 	public String getScore() {		
 		if (playerOnePoints == playerTwoPoints) {
-			if(playerOnePoints >= 3)
-				return "Deuce";
-			else
-				return pointsToString(playerOnePoints) + "-All";
+			if(playerOnePoints >= DEUCE_THRESHOLD)
+				return DEUCE;
+			
+			return pointsToString(playerOnePoints) + SEPARATOR + TIE_SUFFIX;
 		}
 		
-		return pointsToString(playerOnePoints) + "-" + pointsToString(playerTwoPoints);
+		return pointsToString(playerOnePoints) + SEPARATOR + pointsToString(playerTwoPoints);
 	}
 
 	private String pointsToString(int points) {
 		if (points == 0)
-			return "Love";
+			return LOVE_POINT;
 		if (points == 1)
-			return "Fifteen";
+			return FIFTEEN_POINT;
 		if (points == 2)
-			return "Thirty";
+			return THIRTY_POINT;
 		if (points == 3)
-			return "Forty";
+			return FORTY_POINT;
 		return "";
 	}
 
