@@ -1,129 +1,124 @@
 
 public class Match {
 
-	private int P2point;
-	private int P1point;
-	private String winner;
-	private String advantage;
+	private Player winner;
+	private Player advantage;
 	private Player playerTwo;
 	private Player playerOne;
 	
 	public Match(String player1Name, String player2Name) {
 		this.playerOne = new Player(player1Name);
 		this.playerTwo = new Player(player2Name);
-		
-		this.P2point = 0;
-		this.P1point = 0;
 	}
 
 	public boolean hasWinner() {
-		if (P1point>=4 && P2point>=0 && (P1point-P2point)>=2)
+		if (playerOne.getPoints()>=4 && playerTwo.getPoints()>=0 && (playerOne.getPoints()-playerTwo.getPoints())>=2)
         {
-			winner = playerOne.getName();
+			winner = playerOne;
             return true;
         }
-        if (P2point>=4 && P1point>=0 && (P2point-P1point)>=2)
+        if (playerTwo.getPoints()>=4 && playerOne.getPoints()>=0 && (playerTwo.getPoints()-playerOne.getPoints())>=2)
         {
-        	winner = playerTwo.getName();
+        	winner = playerTwo;
             return true;
         }
         
 		return false;
 	}
 
-	public String winner() {
+	public Player winner() {
 		return winner;
 	}
 
 	public void wonPointPlayerOne() {
-		this.P1point++;
+		this.playerOne.incPoints();
 	}
 
 	public void wonPointPlayerTwo() {
-		this.P2point++;
+		this.playerTwo.incPoints();
 	}
 
 	public boolean hasAdvantage() {
-        if (P1point > P2point && P2point >= 3)
+        if (playerOne.getPoints() > playerTwo.getPoints() && playerTwo.getPoints() >= 3)
         {
-        	advantage = playerOne.getName();
+        	advantage = playerOne;
             return true;
         }
         
-        if (P2point > P1point && P1point >= 3)
+        if (playerTwo.getPoints() > playerOne.getPoints() && playerOne.getPoints() >= 3)
         {
-        	advantage = playerTwo.getName();
+        	advantage = playerTwo;
             return true;
         }
 		return false;
 	}
 
-	public String advantage() {
+	public Player advantage() {
 		return advantage;
 	}
 
 	public String state() {
 		String P1res = "", P2res = "";
         String score = "";
-        if (P1point == P2point && P1point < 4)
+        if (playerOne.getPoints() == playerTwo.getPoints() && playerOne.getPoints() < 4)
         {
-            if (P1point==0)
+            if (playerOne.getPoints()==0)
                 score = "Love";
-            if (P1point==1)
+            if (playerOne.getPoints()==1)
                 score = "Fifteen";
-            if (P1point==2)
+            if (playerOne.getPoints()==2)
                 score = "Thirty";
             score += "-All";
         }
-        if (P1point==P2point && P1point>=3)
+        if (playerOne.getPoints()==playerTwo.getPoints() && playerOne.getPoints()>=3)
             score = "Deuce";
         
-        if (P1point > 0 && P2point==0)
+        if (playerOne.getPoints() > 0 && playerTwo.getPoints()==0)
         {
-            if (P1point==1)
+            if (playerOne.getPoints()==1)
                 P1res = "Fifteen";
-            if (P1point==2)
+            if (playerOne.getPoints()==2)
                 P1res = "Thirty";
-            if (P1point==3)
+            if (playerOne.getPoints()==3)
                 P1res = "Forty";
             
             P2res = "Love";
             score = P1res + "-" + P2res;
         }
-        if (P2point > 0 && P1point==0)
+        if (playerTwo.getPoints() > 0 && playerOne.getPoints()==0)
         {
-            if (P2point==1)
+            if (playerTwo.getPoints()==1)
                 P2res = "Fifteen";
-            if (P2point==2)
+            if (playerTwo.getPoints()==2)
                 P2res = "Thirty";
-            if (P2point==3)
+            if (playerTwo.getPoints()==3)
                 P2res = "Forty";
             
             P1res = "Love";
             score = P1res + "-" + P2res;
         }
         
-        if (P1point>P2point && P1point < 4)
+        if (playerOne.getPoints()>playerTwo.getPoints() && playerOne.getPoints() < 4)
         {
-            if (P1point==2)
+            if (playerOne.getPoints()==2)
                 P1res="Thirty";
-            if (P1point==3)
+            if (playerOne.getPoints()==3)
                 P1res="Forty";
-            if (P2point==1)
+            if (playerTwo.getPoints()==1)
                 P2res="Fifteen";
-            if (P2point==2)
+            if (playerTwo.getPoints()==2)
                 P2res="Thirty";
             score = P1res + "-" + P2res;
         }
-        if (P2point>P1point && P2point < 4)
+        if (playerTwo.getPoints()>playerOne.getPoints() && playerTwo.getPoints() < 4)
         {
-            if (P2point==2)
+            if (playerTwo.getPoints()==2)
                 P2res="Thirty";
-            if (P2point==3)
+            if (playerTwo.getPoints()==3)
                 P2res="Forty";
-            if (P1point==1)
+            if (playerOne.getPoints()==1)
                 P1res="Fifteen";
-            if (P1point==2)
+            if (playerOne.getPoints()==2)
                 P1res="Thirty";
             score = P1res + "-" + P2res;
         }        
