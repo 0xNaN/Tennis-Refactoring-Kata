@@ -13,7 +13,7 @@ public class TennisGame2 implements TennisGame
     	else if(match.hasAdvantage())
     		return "Advantage " + match.advantage().getName();
 
-    	return match.state();
+    	return match.getScore();
     }
 
     public void wonPoint(String player) {
