@@ -14,14 +14,10 @@ public class Match {
 	}
 
 	public boolean hasWinner() {
-		if(playerOne.wins(playerTwo)) {
-			winner = playerOne;
-			return true;
-		} else if(playerTwo.wins(playerOne)) {
-			winner = playerTwo;
-			return true;
-		}
-		return false;
+		boolean thereIsWinner = playerOne.wins(playerTwo) || playerTwo.wins(playerOne);
+		if(thereIsWinner)
+			setWinner();
+		return thereIsWinner;
 	}
 
 	public Player winnerPlayer() {
@@ -29,14 +25,19 @@ public class Match {
 	}
 
 	public boolean hasAdvantage() {
+		boolean thereIsAdvantage = playerOne.hasAdvantage(playerTwo) || playerTwo.hasAdvantage(playerOne);
+		if(thereIsAdvantage)
+			setAdvantage();
+		return thereIsAdvantage;
+	}
+
+	private void setAdvantage() {
+		advantage = null;
 		if(playerOne.hasAdvantage(playerTwo)) {
         	advantage = playerOne;
-            return true;
         } else if (playerTwo.hasAdvantage(playerOne)) {
         	advantage = playerTwo;
-            return true;
         }
-		return false;
 	}
 
 	public Player advantagePlayer() {
@@ -53,5 +54,13 @@ public class Match {
 			playerOne.incPoints();
 		else
 			playerTwo.incPoints();
+	}
+	
+	private void setWinner() {
+		winner = null;
+		if(playerOne.wins(playerTwo))
+			winner = playerOne;
+		else if(playerTwo.wins(playerOne))
+			winner = playerTwo;
 	}
 }
