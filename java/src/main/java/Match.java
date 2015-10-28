@@ -3,14 +3,14 @@ public class Match {
 
 	private int P2point;
 	private int P1point;
-	private String player1Name;
-	private String player2Name;
 	private String winner;
 	private String advantage;
+	private Player playerTwo;
+	private Player playerOne;
 	
 	public Match(String player1Name, String player2Name) {
-		this.player1Name = player1Name;
-		this.player2Name = player2Name;
+		this.playerOne = new Player(player1Name);
+		this.playerTwo = new Player(player2Name);
 		
 		this.P2point = 0;
 		this.P1point = 0;
@@ -19,12 +19,12 @@ public class Match {
 	public boolean hasWinner() {
 		if (P1point>=4 && P2point>=0 && (P1point-P2point)>=2)
         {
-			winner = player1Name;
+			winner = playerOne.getName();
             return true;
         }
         if (P2point>=4 && P1point>=0 && (P2point-P1point)>=2)
         {
-        	winner = player2Name;
+        	winner = playerTwo.getName();
             return true;
         }
         
@@ -46,13 +46,13 @@ public class Match {
 	public boolean hasAdvantage() {
         if (P1point > P2point && P2point >= 3)
         {
-        	advantage = player1Name;
+        	advantage = playerOne.getName();
             return true;
         }
         
         if (P2point > P1point && P1point >= 3)
         {
-        	advantage = player2Name;
+        	advantage = playerTwo.getName();
             return true;
         }
 		return false;
