@@ -9,20 +9,19 @@ public class Match {
 	public Match(String player1Name, String player2Name) {
 		this.playerOne = new Player(player1Name);
 		this.playerTwo = new Player(player2Name);
+		
+		this.winner = null;
+		this.advantage = null;
 	}
 
 	public boolean hasWinner() {
-		if (playerOne.getPoints()>=4 && playerTwo.getPoints()>=0 && (playerOne.getPoints()-playerTwo.getPoints())>=2)
-        {
+		if(playerOne.wins(playerTwo)) {
 			winner = playerOne;
-            return true;
-        }
-        if (playerTwo.getPoints()>=4 && playerOne.getPoints()>=0 && (playerTwo.getPoints()-playerOne.getPoints())>=2)
-        {
-        	winner = playerTwo;
-            return true;
-        }
-        
+			return true;
+		} else if(playerTwo.wins(playerOne)) {
+			winner = playerTwo;
+			return true;
+		}
 		return false;
 	}
 
@@ -39,14 +38,10 @@ public class Match {
 	}
 
 	public boolean hasAdvantage() {
-        if (playerOne.getPoints() > playerTwo.getPoints() && playerTwo.getPoints() >= 3)
-        {
+		if(playerOne.hasAdvantage(playerTwo)) {
         	advantage = playerOne;
             return true;
-        }
-        
-        if (playerTwo.getPoints() > playerOne.getPoints() && playerOne.getPoints() >= 3)
-        {
+        } else if (playerTwo.hasAdvantage(playerOne)) {
         	advantage = playerTwo;
             return true;
         }

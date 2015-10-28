@@ -13,6 +13,14 @@ public class Player {
 		return this.name;
 	}
 	
+	public boolean wins(Player player) {
+		return (getPoints() >= 4 && player.getPoints()>=0 && (getPoints() - player.getPoints())>=2);
+	}
+	
+	public boolean hasAdvantage(Player player) {
+		return (getPoints() > player.getPoints() && player.getPoints() >= 3);
+	}
+	
 	public int getPoints() {
 		return points;
 	}

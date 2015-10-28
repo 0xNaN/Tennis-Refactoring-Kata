@@ -1,8 +1,6 @@
 
 public class TennisGame2 implements TennisGame
 {
-    public String P1res = "";
-    public String P2res = "";
 	private Match match;
 
     public TennisGame2(String player1Name, String player2Name) {
